@@ -1,0 +1,1641 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>这把怪谁 — 座2 坏耶这把铁飞(majsoul-ws-1786618863235)</title>
+<style>
+/* ── 令牌:亮色为基准,两处覆盖分别对应「系统暗色」与「显式暗色」 ───────── */
+  :root {
+    --bg:        #F6F8F7;
+    --surface:   #FFFFFF;
+    --surface-2: #EEF2F0;
+    --ink:       #141D1A;
+    --ink-2:     #3F4D48;
+    --muted:     #77857E;
+    --rule:      #DCE4E0;
+    --rule-firm: #C3CFCA;
+    --jade:      #0E8F86;   /* 150k */
+    --clay:      #C2562F;   /* 298k */
+    --jade-wash: rgba(14,143,134,.10);
+    --clay-wash: rgba(194,86,47,.10);
+    --shadow:    0 1px 2px rgba(20,29,26,.05), 0 8px 24px -16px rgba(20,29,26,.28);
+
+    --display: "Songti SC","STSong","Source Han Serif SC","Noto Serif CJK SC","Songti TC",Georgia,serif;
+    --body: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono: ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:        #101513;
+      --surface:   #171E1B;
+      --surface-2: #1E2724;
+      --ink:       #E9EEEB;
+      --ink-2:     #B4BFBA;
+      --muted:     #8A968F;
+      --rule:      #28322E;
+      --rule-firm: #3A4642;
+      --jade:      #17A092;
+      --clay:      #D4693C;
+      --jade-wash: rgba(23,160,146,.14);
+      --clay-wash: rgba(212,105,60,.14);
+      --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:        #101513;
+    --surface:   #171E1B;
+    --surface-2: #1E2724;
+    --ink:       #E9EEEB;
+    --ink-2:     #B4BFBA;
+    --muted:     #8A968F;
+    --rule:      #28322E;
+    --rule-firm: #3A4642;
+    --jade:      #17A092;
+    --clay:      #D4693C;
+    --jade-wash: rgba(23,160,146,.14);
+    --clay-wash: rgba(212,105,60,.14);
+    --shadow:    0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 860px; margin: 0 auto; padding: clamp(28px, 6vw, 72px) clamp(18px, 5vw, 40px) 96px; }
+
+  /* ── 页眉 ───────────────────────────────────────────────────────── */
+  .masthead { border-bottom: 2px solid var(--ink); padding-bottom: 22px; margin-bottom: 40px; }
+  .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(30px, 5.2vw, 46px); line-height: 1.18;
+    letter-spacing: -.01em; margin: 0 0 14px; text-wrap: balance;
+  }
+  .standfirst {
+    font-size: clamp(16px, 2vw, 18px); color: var(--ink-2);
+    margin: 0 0 22px; max-width: 62ch; text-wrap: pretty;
+  }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: 6px 22px;
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+  }
+  .meta b { font-weight: 500; color: var(--ink-2); }
+
+  /* ── 章节 ───────────────────────────────────────────────────────── */
+  section { margin-top: 56px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--jade);
+    display: flex; align-items: center; gap: 12px; margin: 0 0 10px;
+  }
+  .eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(22px, 3.2vw, 29px); line-height: 1.3;
+    margin: 0 0 18px; text-wrap: balance;
+  }
+  h3 {
+    font-family: var(--body); font-weight: 600; font-size: 16px;
+    margin: 34px 0 10px; color: var(--ink);
+  }
+  p { margin: 0 0 16px; max-width: 68ch; text-wrap: pretty; }
+  strong { font-weight: 600; }
+  code {
+    font-family: var(--mono); font-size: .88em;
+    background: var(--surface-2); padding: .12em .4em; border-radius: 3px;
+    border: 1px solid var(--rule);
+  }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* ── 结论条 ─────────────────────────────────────────────────────── */
+  .verdict {
+    background: var(--surface); border: 1px solid var(--rule);
+    border-left: 3px solid var(--jade); border-radius: 3px;
+    padding: 20px 24px; box-shadow: var(--shadow); margin-bottom: 30px;
+  }
+  .verdict p { margin: 0; max-width: none; }
+  .verdict p + p { margin-top: 10px; }
+
+  /* ── 指标块 ─────────────────────────────────────────────────────── */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .tile { background: var(--surface); padding: 16px 18px; }
+  .tile .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .tile .value { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 25px; font-weight: 600; line-height: 1.15; letter-spacing: -.02em; }
+  .tile .note { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.45; }
+  .v-jade { color: var(--jade); }
+  .v-clay { color: var(--clay); }
+
+  /* ── 图 ─────────────────────────────────────────────────────────── */
+  figure {
+    margin: 30px 0; background: var(--surface); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 20px 20px 14px; box-shadow: var(--shadow);
+  }
+  .fig-head { margin-bottom: 4px; }
+  .fig-title { font-weight: 600; font-size: 15px; }
+  .fig-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 12px 0 4px; font-size: 13px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; color: var(--ink-2); }
+  .swatch { width: 11px; height: 11px; border-radius: 2px; flex: none; }
+  .chart-wrap { overflow-x: auto; }
+  .chart-wrap svg { display: block; width: 100%; min-width: 460px; height: auto; }
+  figcaption { font-size: 12.5px; color: var(--muted); margin-top: 10px; line-height: 1.55; }
+  .bar { cursor: default; transition: opacity .12s ease; }
+  @media (prefers-reduced-motion: reduce) { .bar { transition: none; } }
+  .bar:hover { opacity: .82; }
+  .tip {
+    position: fixed; z-index: 10; pointer-events: none; opacity: 0;
+    background: var(--ink); color: var(--bg); font-family: var(--mono);
+    font-size: 12px; padding: 6px 9px; border-radius: 3px; white-space: nowrap;
+    transform: translate(-50%, -140%); transition: opacity .1s ease;
+  }
+  .tip.on { opacity: 1; }
+
+  /* ── 表 ─────────────────────────────────────────────────────────── */
+  .table-wrap { overflow-x: auto; margin: 22px 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 14.5px; }
+  caption { text-align: left; font-size: 13px; color: var(--muted); padding-bottom: 8px; }
+  th, td { padding: 9px 12px; text-align: right; border-bottom: 1px solid var(--rule); }
+  th:first-child, td:first-child { text-align: left; }
+  thead th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted); font-weight: 500;
+    border-bottom: 1px solid var(--rule-firm); white-space: nowrap;
+  }
+  tbody td { font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: none; }
+  td.sig { color: var(--jade); font-weight: 600; }
+  td.ns { color: var(--muted); }
+  .row-298 td:first-child { border-left: 3px solid var(--clay); padding-left: 9px; }
+  .row-150 td:first-child { border-left: 3px solid var(--jade); padding-left: 9px; }
+
+  /* ── 提示框 ─────────────────────────────────────────────────────── */
+  .callout {
+    background: var(--surface-2); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 16px 20px; margin: 22px 0;
+  }
+  .callout .h { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .callout p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+  .callout p + p { margin-top: 8px; }
+
+  pre {
+    font-family: var(--mono); font-size: 13px; line-height: 1.65;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 14px 16px; overflow-x: auto; margin: 16px 0; color: var(--ink-2);
+  }
+  ul { margin: 0 0 16px; padding-left: 1.15em; max-width: 68ch; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--muted); }
+
+  footer {
+    margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule);
+    font-size: 12.5px; color: var(--muted);
+  }
+  :focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
+
+  /* ── 通用别名:模型 A / 模型 B(A=jade 青,B=clay 赭) ───────────── */
+  .v-a { color: var(--jade); }
+  .v-b { color: var(--clay); }
+  .row-a td:first-child { border-left: 3px solid var(--jade); padding-left: 9px; }
+  .row-b td:first-child { border-left: 3px solid var(--clay); padding-left: 9px; }
+  .sw-a { background: var(--jade); }
+  .sw-b { background: var(--clay); }
+  .delta-up { color: var(--jade); }
+  .delta-down { color: var(--clay); }
+
+  /* ── 侧边导航 ───────────────────────────────────────────────────── */
+  /* 正文是居中的 860px 单栏。目录固定在它左侧的空白里,不占正文宽度 ——
+     窗口窄到放不下就整条隐藏,不去挤正文。 */
+  .toc {
+    position: fixed; top: 0; left: 0;
+    /* 宽度只能吃左侧空白:(视口 − 正文 860)/2 再留出 24px 内边距和 8px 余量。
+       写死一个最小宽度会在断点附近盖住正文,所以这里不设下限,由断点保证够宽。 */
+    width: calc((100vw - 860px) / 2 - 32px);
+    max-width: 260px; height: 100vh; overflow-y: auto;
+    padding: clamp(28px, 6vw, 72px) 0 48px 24px;
+    display: none;
+  }
+  @media (min-width: 1240px) { .toc { display: block; } }
+  @media print { .toc { display: none; } }
+
+  .toc ol { list-style: none; margin: 0; padding: 0; }
+  .toc li { margin: 0; }
+  .toc a {
+    display: block; padding: 7px 12px 7px 13px; margin-left: -1px;
+    border-left: 2px solid var(--rule);
+    color: var(--muted); text-decoration: none;
+    font-size: 13px; line-height: 1.4;
+    transition: color .12s ease, border-color .12s ease;
+  }
+  .toc a:hover { color: var(--ink-2); border-left-color: var(--rule-firm); }
+  .toc a.on { color: var(--ink); border-left-color: var(--jade); font-weight: 600; }
+  .toc .toc-tag {
+    display: block;
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 1px;
+  }
+  .toc a.on .toc-tag { color: var(--jade); }
+  @media (prefers-reduced-motion: reduce) { .toc a { transition: none; } }
+
+  /* 锚点跳转时别把标题顶到贴边 */
+  .page section { scroll-margin-top: 24px; }
+
+</style>
+<script>
+/* 报告里的图表工具:内联到 <script> 里用。
+ *
+ * 颜色一律从 CSS 令牌取(tok("--jade") 等),主题切换时整张图重画 —— SVG 里写死
+ * 十六进制的话,暗色模式下就是一团糊。
+ *
+ * 页面里需要有:<div class="tip" id="tip" role="status" aria-live="polite"></div>
+ */
+(function (global) {
+  var NS = "http://www.w3.org/2000/svg";
+  var css = getComputedStyle(document.documentElement);
+
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+
+  function el(tag, attrs, parent) {
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+
+  // 顶端 4px 圆角、底端贴基线的柱形
+  function barPath(x, y, w, h) {
+    var r = Math.min(4, w / 2, h);
+    return "M" + x + "," + (y + h) + " V" + (y + r) +
+           " Q" + x + "," + y + " " + (x + r) + "," + y +
+           " H" + (x + w - r) + " Q" + (x + w) + "," + y + " " + (x + w) + "," + (y + r) +
+           " V" + (y + h) + " Z";
+  }
+
+  function hover(node, text) {
+    var tip = document.getElementById("tip");
+    if (!tip) return;
+    node.addEventListener("mouseenter", function (e) {
+      tip.textContent = text; tip.classList.add("on");
+      tip.style.left = e.clientX + "px"; tip.style.top = e.clientY + "px";
+    });
+    node.addEventListener("mousemove", function (e) {
+      tip.style.left = e.clientX + "px"; tip.style.top = e.clientY + "px";
+    });
+    node.addEventListener("mouseleave", function () { tip.classList.remove("on"); });
+  }
+
+  /* 分组柱状图。
+   *   groupedBars("c1", {
+   *     groups: ["1 位", "2 位", "3 位", "4 位"],
+   *     series: [{name: "A", values: [...], color: "--jade"}, {...}],
+   *     max: 60, ticks: [0,20,40,60], unit: "%",
+   *     guide: {at: 25, label: "等强 25%"},   // 可选参考线
+   *   })
+   */
+  function groupedBars(id, o) {
+    var svg = document.getElementById(id);
+    if (!svg) return;
+    svg.textContent = "";
+    // 正文没写 viewBox 的话,这里补上 —— 光在 JS 里用默认值是不够的:元素没有 viewBox
+    // 就没有内在长宽比,CSS 的 width:100%/height:auto 会退回浏览器默认的 300×150 视口,
+    // 720×300 的图被裁掉右边和顶部(最后一组柱子直接看不见)。
+    var vbAttr = svg.getAttribute("viewBox");
+    if (!vbAttr) {
+      vbAttr = "0 0 720 300";
+      svg.setAttribute("viewBox", vbAttr);
+      if (!svg.getAttribute("preserveAspectRatio")) {
+        svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+      }
+    }
+    var vb = vbAttr.trim().split(/\s+/);
+    var W = +vb[2], H = +vb[3];
+    var L = o.left || 46, R = o.right || 14, T = o.top || 18, B = o.bottom || 54;
+    var pw = W - L - R, ph = H - T - B, base = T + ph;
+    var max = o.max, unit = o.unit || "";
+    var y = function (v) { return T + ph * (1 - v / max); };
+
+    (o.ticks || []).forEach(function (g) {
+      el("line", { x1: L, x2: W - R, y1: y(g), y2: y(g), stroke: tok("--rule"), "stroke-width": 1 }, svg);
+      el("text", { x: L - 10, y: y(g) + 4, "text-anchor": "end", fill: tok("--muted"),
+        "font-size": 11, "font-family": tok("--mono") }, svg).textContent = g + unit;
+    });
+    if (o.guide) {
+      el("line", { x1: L, x2: W - R, y1: y(o.guide.at), y2: y(o.guide.at), stroke: tok("--rule-firm"),
+        "stroke-width": 1.5, "stroke-dasharray": "5 4" }, svg);
+      el("text", { x: W - R, y: y(o.guide.at) - 8, "text-anchor": "end", fill: tok("--muted"),
+        "font-size": 11, "font-family": tok("--mono") }, svg).textContent = o.guide.label;
+    }
+
+    var n = o.series.length, gw = pw / o.groups.length;
+    var bw = o.barWidth || Math.min(44, (gw - 16) / n);
+    o.groups.forEach(function (label, i) {
+      var cx = L + gw * i + gw / 2;
+      o.series.forEach(function (s, k) {
+        var v = s.values[i];
+        if (v == null) return;
+        var x = cx + (k - n / 2) * (bw + 2) + 1, yy = y(v), h = base - yy;
+        var p = el("path", { d: barPath(x, yy, bw, h), fill: tok(s.color), class: "bar" }, svg);
+        var txt = s.name + " · " + label + "  " + v.toFixed(1) + unit;
+        el("title", {}, p).textContent = txt;
+        hover(p, txt);
+        el("text", { x: x + bw / 2, y: yy - 7, "text-anchor": "middle", fill: tok("--ink-2"),
+          "font-size": 11.5, "font-family": tok("--mono") }, svg).textContent = v.toFixed(1);
+      });
+      el("text", { x: cx, y: base + 24, "text-anchor": "middle", fill: tok("--ink"),
+        "font-size": 13, "font-family": tok("--body") }, svg).textContent = label;
+    });
+    el("line", { x1: L, x2: W - R, y1: base, y2: base, stroke: tok("--rule-firm"), "stroke-width": 1 }, svg);
+  }
+
+  /* 重画钩子:把所有画图函数交给它,主题一变就整体重画。 */
+  function onThemeChange(draw) {
+    draw();
+    if (global.matchMedia) {
+      var mq = global.matchMedia("(prefers-color-scheme: dark)");
+      if (mq.addEventListener) mq.addEventListener("change", draw);
+    }
+    new MutationObserver(draw).observe(document.documentElement,
+      { attributes: true, attributeFilter: ["data-theme"] });
+  }
+
+  global.RPT = { tok: tok, el: el, barPath: barPath, hover: hover,
+                 groupedBars: groupedBars, onThemeChange: onThemeChange };
+})(window);
+
+</script>
+</head>
+<body>
+<nav class="toc" id="toc" aria-label="目录"></nav>
+<div class="page">
+
+<header>
+  <p class="eyebrow">dareda 牌谱全量分析</p>
+  <h1>这把怪谁 —— 座2 坏耶这把铁飞</h1>
+  <p class="lede" style="font-size:16.5px;color:var(--ink-2)">
+    牌谱 <span class="num">majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3</span>,
+    四人东南战 K = 9 局。Hero = <strong>座2 坏耶这把铁飞</strong>,终局 <span class="num">4300</span> 点,
+    <strong>4 位</strong>。牌山约定 <code>dead_wall_tail</code>,配牌恒等 9/9 局通过
+    (牌谱内无杠,岭上牌未验证)。
+  </p>
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">Hero 终局</div>
+      <div class="value">4 位</div>
+      <div class="note">4300 点</div>
+    </div>
+    <div class="tile">
+      <div class="label">权重 A</div>
+      <div class="value v-a">150k</div>
+      <div class="note">mortal_150k.pth<br>steps=150000 · t24011010</div>
+    </div>
+    <div class="tile">
+      <div class="label">权重 B</div>
+      <div class="value v-b">298k</div>
+      <div class="note">mortal_298k.pth<br>steps=298000 · t26031702</div>
+    </div>
+    <div class="tile">
+      <div class="label">生成时间</div>
+      <div class="value" style="font-size:19px">2026-08-13</div>
+      <div class="note">20:48 JST · 全部项目已完成</div>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:14px">
+    确定性标签 —— A:<code>mortal4-b40c192-t24011010|steps=150000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release</code>;
+    B:<code>mortal4-b40c192-t26031702|steps=298000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release</code>。
+    两边同为 CPU 推理、关 AMP,seed = 0。
+  </p>
+</header>
+
+<div class="verdict">
+  <p class="oneline">→ 好牌,打得一般,而且这把运气还背。</p>
+  <p class="oneline-sub">
+    这是 <code>diagnose</code> 在<strong>两份权重下逐字相同</strong>的那句话
+    (也就是双击 <code>run.sh</code> 会直接给你的结论)。三项星级:
+  </p>
+
+  <div class="table-wrap">
+  <table class="stars">
+    <thead>
+      <tr><th></th><th>星级</th><th>判词</th><th class="v-a">A · 150k</th><th class="v-b">B · 298k</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>牌</strong></td><td class="star">★★★★☆</td><td><strong>好牌</strong></td>
+        <td>均等水平下这个座位期望 <span class="num v-a">2.17</span> 位</td>
+        <td>均等水平下这个座位期望 <span class="num v-b">2.10</span> 位</td>
+      </tr>
+      <tr>
+        <td><strong>打</strong></td><td class="star">★★☆☆☆</td><td><strong>打得一般</strong></td>
+        <td>你的打法把期望推到 <span class="num v-a">2.30</span> 位(<span class="num">−0.13</span>)<span class="note">EV loss 0.320,四家第 2 低</span></td>
+        <td>你的打法把期望推到 <span class="num v-b">2.13</span> 位(<span class="num">−0.03</span>)<span class="note">EV loss 0.224,四家最低</span></td>
+      </tr>
+      <tr>
+        <td><strong>运</strong></td><td class="star">☆☆☆☆☆</td><td><strong>运气背</strong></td>
+        <td>你的同水平里,4 位或更差占 <span class="num v-a">10%</span></td>
+        <td>你的同水平里,4 位或更差占 <span class="num v-b">10%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    以权重 A 为正文口径:<strong>牌不错(均等水平下这个座位期望 2.17 位),打法一般
+    (把期望推到 2.30 位),而运气是压倒性的那一块</strong>。名次分解为
+    牌与座次 <span class="num">+0.33</span> + 打法 <span class="num">−0.13</span> +
+    运气 <span class="num">−1.70</span> = <span class="num">−1.50</span>,
+    也就是从中性的 2.5 位掉到实际的 4 位。三项里运气占了绝大部分。
+  </p>
+  <p>
+    self-luck 的判词是<strong>「偏背」</strong>:按 hero 自己的水平(标定温度 1.00,即与 Mortal 同档、
+    不额外加噪)把这副牌山重打 30 次,只有 <span class="num">10%</span> 会打到 4 位 ——
+    同水平期望顺位 <span class="num">2.30</span>,平均点数 <span class="num">26433</span>,
+    而实际拿到的是最差的那一档。换句话说这把<strong>确实是被运气坑的</strong>:
+    同水平的自己有 90% 会打得比这更好。
+  </p>
+  <p>
+    <strong>两份权重在结论上完全一致,而且 B 比 A 更偏向「不怪你」。</strong>权重 B 把同样的 −1.50
+    拆成牌 <span class="num">+0.40</span> + 打法 <span class="num">−0.03</span> + 运气
+    <span class="num">−1.87</span>,判词同样是「偏背」、4 位概率同样是 <span class="num">10%</span>。
+    三项归因、判词、4 位概率两边同向且量级接近,这个结论<strong>是稳的</strong>。
+    另一条两份权重都成立的硬事实:hero 的 EV loss(A 0.320 / B 0.224)<strong>不是四家最差的</strong> ——
+    A 下是四家第 2 低,B 下直接是<strong>四家最低</strong>,一致率 72% / 74% 也是四家最高档。
+    这局打得最不干净的是座0 健麻a(EV loss 0.488 / 0.424),而他拿了 3 位。
+  </p>
+</div>
+
+<section id="four">
+  <p class="eyebrow">self-luck</p>
+  <h2>四家总览</h2>
+  <p>
+    每家按自己被标定出的水平(温度越高越随机)重打这副牌山 30 次,看实际顺位落在自家分布的什么位置。
+    EV loss 是在人类原局上逐决策测的强度,数值越大离 Mortal 越远。下表为<strong>权重 A</strong> 口径,
+    标定温度 <code>{0: 1.17, 1: 1.00, 2: 1.00, 3: 1.13}</code>。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>座 / 玩家</th><th>决策数</th><th>一致率</th><th>EV loss</th><th>实际</th><th>同水平期望</th><th>1位</th><th>2位</th><th>3位</th><th>4位</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>座0 健麻a</td><td class="num">93</td><td class="num">53%</td><td class="num">0.488</td><td class="num">3 位</td><td class="num">3.33</td><td class="num">3%</td><td class="num">13%</td><td class="num">30%</td><td class="num">53%</td></tr>
+      <tr><td>座1 ただ風を待つ</td><td class="num">89</td><td class="num">72%</td><td class="num">0.257</td><td class="num">1 位</td><td class="num">1.50</td><td class="num">63%</td><td class="num">23%</td><td class="num">13%</td><td class="num">0%</td></tr>
+      <tr class="hero"><td><strong>座2 坏耶这把铁飞</strong>(hero)</td><td class="num">74</td><td class="num">72%</td><td class="num">0.320</td><td class="num">4 位</td><td class="num">2.30</td><td class="num">20%</td><td class="num">40%</td><td class="num">30%</td><td class="num">10%</td></tr>
+      <tr><td>座3 刘树德</td><td class="num">93</td><td class="num">62%</td><td class="num">0.369</td><td class="num">2 位</td><td class="num">2.87</td><td class="num">13%</td><td class="num">23%</td><td class="num">27%</td><td class="num">37%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    值得单独指出:<strong>座0 和座3 是反过来的</strong> —— 座0 同水平期望 3.33 位却拿了 3 位、
+    座3 期望 2.87 位却拿了 2 位,两家都打在自己分布的好的一侧。真正落在分布尾巴上的只有 hero:
+    期望 2.30 位、实际 4 位,而 4 位在他自己的分布里只占 10%。
+  </p>
+
+  <p>
+    权重 B 下同一张表的数字略有平移但排序不变:座0 EV loss <span class="num">0.424</span>(期望 3.43 位 / 实际 3 位)、
+    座1 <span class="num">0.229</span>(1.87 / 1 位)、hero <span class="num">0.224</span>(2.13 / 4 位)、
+    座3 <span class="num">0.310</span>(2.57 / 2 位),标定温度 <code>{0: 1.11, 1: 1.00, 2: 1.00, 3: 1.02}</code>。
+    hero 在 B 下的 EV loss 变成四家最低。
+  </p>
+</section>
+
+<section id="dist">
+  <p class="eyebrow">同水平自打分布</p>
+  <h2>Hero 的顺位分布(A 与 B 并排)</h2>
+  <p>
+    把 hero 换成「按标定温度采样的自己」,对手也各按自己的温度,在同一副牌山上重打 30 次的顺位分布。
+    两份权重都把实际拿到的 4 位放在最薄的那一档(各 <span class="num">10%</span>),
+    而最厚的一档都在 1~2 位。虚线是等强情况下的 25%。
+  </p>
+  <div class="chart-wrap"><svg id="c1" viewBox="0 0 720 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="hero 顺位分布,A 与 B 分组柱状图"></svg></div>
+  <p class="note-line">
+    平均顺位:A <span class="num v-a">2.30</span>(平均点数 26433) · B <span class="num v-b">2.13</span>(平均点数 31680)。
+    实际 <strong>4 位 / 4300 点</strong>,两边的平均点数都比实际高出 <span class="num">2.2 万</span>以上。
+  </p>
+</section>
+
+<section id="compare">
+  <p class="eyebrow">A vs B</p>
+  <h2>两份权重逐项对比</h2>
+  <p>
+    A = <code>mortal_150k.pth</code>(项目默认),B = <code>mortal_298k.pth</code>。同一份牌谱、同一 seed = 0,
+    只换权重。下表逐项列出两边的结果,<strong>分歧的项目会明确标注「不稳」</strong>。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>项目</th><th class="v-a">A · 150k</th><th class="v-b">B · 298k</th><th>是否一致</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>replay</strong> — 四家全 Mortal<br><span class="note">hero 终局</span></td>
+        <td><span class="num v-a">1 位 / 47000</span><br><span class="note">K′=4,东四击飞终局</span></td>
+        <td><span class="num v-b">2 位 / 35000</span><br><span class="note">K′=9,走完全程</span></td>
+        <td><span class="delta-up">方向一致</span><br><span class="note">都远好于实际的 4 位 / 4300;但名次与终止方式不同 —— <strong>这项细节不稳</strong></span></td>
+      </tr>
+      <tr>
+        <td><strong>counterfactual</strong> — 只 hero 换 Mortal<br><span class="note">对手照人类原样打</span></td>
+        <td><span class="num v-a">4 位 / −16300</span><br><span class="note">2 位/1 位/<strong>4 位</strong>/3 位</span></td>
+        <td><span class="num v-b">4 位 / 6800</span><br><span class="note">3 位/2 位/<strong>4 位</strong>/1 位</span></td>
+        <td><span class="delta-down">一致(都是 4 位)</span><br><span class="note">但保真度低,见下</span></td>
+      </tr>
+      <tr>
+        <td><strong>counterfactual 保真度</strong></td>
+        <td><span class="num v-a">中位 51%</span><br><span class="note">1/9 局全程一致</span></td>
+        <td><span class="num v-b">中位 51%</span><br><span class="note">2/9 局全程一致</span></td>
+        <td>一致<br><span class="note">两边中位数都只有 51% —— <strong>这一项整体不该当真</strong></span></td>
+      </tr>
+      <tr>
+        <td><strong>self-luck</strong> — 同水平平均顺位</td>
+        <td><span class="num v-a">2.30 位</span></td>
+        <td><span class="num v-b">2.13 位</span></td>
+        <td><span class="delta-up">一致</span><br><span class="note">差 0.17 位,同向;B 更看好 hero</span></td>
+      </tr>
+      <tr>
+        <td><strong>self-luck</strong> — 判词</td>
+        <td><span class="v-a">偏背</span><br><span class="note">P(4 位)=10%</span></td>
+        <td><span class="v-b">偏背</span><br><span class="note">P(4 位)=10%</span></td>
+        <td><span class="delta-up">完全一致</span></td>
+      </tr>
+      <tr>
+        <td><strong>diagnose</strong> — 牌与座次</td>
+        <td><span class="num v-a">+0.33</span><br><span class="note">均等水平期望 2.17 位</span></td>
+        <td><span class="num v-b">+0.40</span><br><span class="note">均等水平期望 2.10 位</span></td>
+        <td><span class="delta-up">一致</span><br><span class="note">都判「好牌」(★★★★☆)</span></td>
+      </tr>
+      <tr>
+        <td><strong>diagnose</strong> — 打法</td>
+        <td><span class="num v-a">−0.13</span><br><span class="note">EV loss 0.320,四家第 2 低</span></td>
+        <td><span class="num v-b">−0.03</span><br><span class="note">EV loss 0.224,四家最低</span></td>
+        <td><span class="delta-up">一致</span><br><span class="note">都判「打得一般」(★★☆☆☆),都是小幅负贡献</span></td>
+      </tr>
+      <tr>
+        <td><strong>diagnose</strong> — 运气</td>
+        <td><span class="num v-a">−1.70</span></td>
+        <td><span class="num v-b">−1.87</span></td>
+        <td><span class="delta-up">一致</span><br><span class="note">都判「运气背」(☆☆☆☆☆),都是三项里最大的一块</span></td>
+      </tr>
+      <tr>
+        <td><strong>diagnose</strong> — 合计</td>
+        <td><span class="num v-a">−1.50</span></td>
+        <td><span class="num v-b">−1.50</span></td>
+        <td>一致<br><span class="note">合计恒等于「实际顺位 − 2.5」,不是独立证据</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    <strong>怎么读这张表:</strong>唯一实质分歧在 <code>replay</code>(全 Mortal 重打)——
+    A 下东四就把座3 打到 −1500 提前击飞、hero 收 47000 拿 1 位;B 下九局走完、hero 35000 拿 2 位。
+    这是「顶尖打法能把这副牌打成什么」的上限估计,两份权重给出不同的路径,<strong>具体点数不要当数值结论</strong>,
+    只当「远好于实际」的定性证据。其余各项 —— 归因三分解、判词、4 位概率、counterfactual 名次 —— 两边同向。
+  </p>
+</section>
+
+<section id="mc">
+  <p class="eyebrow">montecarlo</p>
+  <h2>蒙特卡洛敏感性</h2>
+  <p>
+    这一节问的是<strong>另一个问题</strong>,而且必须先说清它到底跑了什么,否则数字会被读反。
+    命令内部用的是 <code>CounterfactualMonteCarlo</code> —— 它是 <strong>counterfactual 的分布版</strong>,
+    不是 replay 的分布版:hero 换成 Mortal(全程 greedy),而<strong>三个对手仍然照人类原样出牌</strong>,
+    只有当某个对手<strong>脱轨</strong>(牌河已经和原局对不上、人类那步动作不再可用)之后,
+    才回落到 Mortal 接手。三档「强度」调的<strong>只是这个脱轨后 fallback 的温度</strong>,
+    温度越高越随机、越弱。
+  </p>
+  <div class="callout">
+    <p>
+      <strong><code>full-mortal</code> 这个档名容易误读:它不等于「四家全 Mortal」。</strong>
+      它的含义是「对手脱轨后的 fallback 是满强度 greedy Mortal」,对手在脱轨之前依旧在复刻人类的实际出牌。
+      真正的「四家从第一张牌起全是 Mortal」是本报告的 <code>replay</code> 一节,那是另一套东西 ——
+      两者结果差得很远(A 下 hero 47000 / 1 位 vs −16300 / 4 位),原因就在这里:
+      <code>replay</code> 里对手不再打出人类那些牌,牌河从东一就整个变了;本节里 hero 面对的仍是
+      那个把他打崩的牌河。
+    </p>
+    <p>
+      同理,本节与 <strong>self-luck</strong> 也不是一回事:self-luck(<code>SelfStrengthMonteCarlo</code>)
+      是四家都按各自标定温度<strong>从头重打一局全新的牌</strong>,完全不跟随人类日志。
+      三者的区别一句话:<strong>replay = 四家全 Mortal 重开;self-luck = 四家按各自水平重开;
+      本节 = 钉在人类牌河上的反事实</strong>。
+    </p>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>强度档</th><th>对手温度</th><th>n</th><th>平均顺位</th><th>平均点数</th><th>1位</th><th>2位</th><th>3位</th><th>4位</th></tr>
+    </thead>
+    <tbody>
+      <tr class="row-a"><td>full-mortal<br><span class="note">对手脱轨后回落到 greedy Mortal</span></td><td><code>{0:1.00, 1:1.00, 3:1.00}</code></td><td class="num">1</td><td class="num">4.00</td><td class="num">−16300</td><td class="num">0%</td><td class="num">0%</td><td class="num">0%</td><td class="num">100%</td></tr>
+      <tr class="row-a"><td>calibrated<br><span class="note">fallback = 各自实测水平</span></td><td><code>{0:1.17, 1:1.00, 3:1.13}</code></td><td class="num">20</td><td class="num">3.10</td><td class="num">16325</td><td class="num">15%</td><td class="num">10%</td><td class="num">25%</td><td class="num">50%</td></tr>
+      <tr class="row-a"><td>weaker<br><span class="note">fallback 更弱(EV loss 翻倍)</span></td><td><code>{0:1.65, 1:1.29, 3:1.57}</code></td><td class="num">20</td><td class="num">3.05</td><td class="num">16120</td><td class="num">5%</td><td class="num">25%</td><td class="num">30%</td><td class="num">40%</td></tr>
+      <tr class="row-b"><td>full-mortal</td><td><code>{0:1.00, 1:1.00, 3:1.00}</code></td><td class="num">1</td><td class="num">4.00</td><td class="num">6800</td><td class="num">0%</td><td class="num">0%</td><td class="num">0%</td><td class="num">100%</td></tr>
+      <tr class="row-b"><td>calibrated</td><td><code>{0:1.11, 1:1.00, 3:1.02}</code></td><td class="num">20</td><td class="num">3.60</td><td class="num">6680</td><td class="num">5%</td><td class="num">5%</td><td class="num">15%</td><td class="num">75%</td></tr>
+      <tr class="row-b"><td>weaker</td><td><code>{0:1.56, 1:1.21, 3:1.43}</code></td><td class="num">20</td><td class="num">3.30</td><td class="num">11980</td><td class="num">10%</td><td class="num">15%</td><td class="num">10%</td><td class="num">65%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="chart-wrap"><svg id="c2" viewBox="0 0 720 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="三档对手强度下 hero 的平均顺位,A 与 B 分组柱状图"></svg></div>
+
+  <p>
+    <strong>full-mortal 那一档是确定性单次重放,不是 100% 的置信度。</strong>对手全 greedy 时整条轨迹完全确定,
+    工具只跑 1 条(跑 20 条是同一局算 20 遍),所以 <code>n=1</code>、分布显示 100% 4 位 ——
+    这句话的意思仅仅是「那唯一一条确定轨迹的结果是 4 位」。这一档的终局点数
+    (A <span class="num">−16300</span> / B <span class="num">6800</span>)与本报告 counterfactual 一节
+    <strong>逐字相同,而且是按构造必然相同</strong> —— 两者用的是同一套引擎、同样 greedy 的脱轨 fallback,
+    epsilon = 0 时整条轨迹完全确定。换句话说 <code>full-mortal</code> 档没有提供 counterfactual 之外的新信息,
+    它的作用是给另外两档当参照系。
+  </p>
+
+  <p>
+    <strong>本节和 self-luck 的数字方向相反,原因是实验根本不同,不是矛盾。</strong>
+    self-luck 说 hero 同水平期望 2.30 位(A)/ 2.13 位(B);本节说 3.10 位(A)/ 3.60 位(B),
+    比中性的 2.5 位还差。差别在于:self-luck 让四家<strong>从头重打一局全新的牌</strong>,
+    hero 有机会走上完全不同的路;本节把 hero 钉在<strong>人类那条已经崩掉的牌河</strong>上
+    ——对手前半局还在复刻真实出牌(保真度中位数仅 51%),hero 就算换成 Mortal 也是在接一个烂摊子。
+    再加上 hero 是确定性策略,20 条轨迹的全部方差只来自对手脱轨后的采样,样本又少。
+    <strong>「这把怪谁」的正文口径以 self-luck / diagnose 为准</strong>(那才是本工具为归因设计的实验),
+    本节只作为「对手强度变化时,那条既定牌河上的反事实有多敏感」的参考。
+  </p>
+
+  <p>
+    本节内部两份权重也<strong>不一致</strong>:A 下 calibrated → weaker 几乎没变化(3.10 → 3.05),
+    B 下则明显改善(3.60 → 3.30)。方向上唯一共同点是「对手变弱 hero 不会更差」,
+    这几乎是同义反复。<strong>本节的具体数值不建议当结论用</strong>,n=20 的分布抖动足以解释这些差距。
+  </p>
+</section>
+
+<section id="cost">
+  <p class="eyebrow">资源账</p>
+  <h2>耗时与内存</h2>
+  <p>
+    每条命令都经 <code>run_step.py</code> 执行,用 <code>os.wait4</code> 逐进程采集 rusage
+    (不是 <code>RUSAGE_CHILDREN</code> 的累计值),所以下表的内存数字是各步骤自己的峰值,互不叠加。
+    各步骤<strong>串行</strong>执行,墙钟之间也不互相污染。
+  </p>
+<!--STEPS:BEGIN-->
+<div class="meta" style="margin-bottom:14px">
+  <span><b>CPU</b> Apple M4</span>
+  <span><b>逻辑核</b> 10</span>
+  <span><b>内存</b> 32.0 GB</span>
+  <span><b>Python</b> 3.11.13</span>
+  <span><b>torch</b> 2.13.0</span>
+  <span><b>torch 线程</b> 4</span>
+  <span><b>device</b> cpu</span>
+</div>
+<div class="table-wrap">
+<table><caption>每步的墙钟、CPU 时间与峰值常驻内存,os.wait4 逐进程采集</caption>
+<thead><tr><th>步骤</th><th>权重</th><th>墙钟 s</th><th>用户态 s</th><th>系统态 s</th><th>CPU%</th><th>峰值 MB</th><th>退出</th></tr></thead>
+<tbody>
+<tr><td>decode-capture</td><td>—</td><td>0.18</td><td>0.12</td><td>0.03</td><td>80</td><td>29.5</td><td class="sig">0</td></tr>
+<tr><td>verify</td><td>—</td><td>0.12</td><td>0.09</td><td>0.02</td><td>94</td><td>20.7</td><td class="sig">0</td></tr>
+<tr><td>inspect</td><td>—</td><td>0.09</td><td>0.06</td><td>0.02</td><td>94</td><td>20.0</td><td class="sig">0</td></tr>
+<tr class="row-a"><td>replay</td><td>A · 150k</td><td>3.44</td><td>2.89</td><td>0.50</td><td>99</td><td>430.6</td><td class="sig">0</td></tr>
+<tr class="row-a"><td>counterfactual</td><td>A · 150k</td><td>11.38</td><td>10.77</td><td>1.51</td><td>108</td><td>434.7</td><td class="sig">0</td></tr>
+<tr class="row-a"><td>diagnose</td><td>A · 150k</td><td>175.66</td><td>624.19</td><td>11.50</td><td>362</td><td>426.1</td><td class="sig">0</td></tr>
+<tr class="row-b"><td>replay</td><td>B · 298k</td><td>8.42</td><td>7.48</td><td>1.30</td><td>104</td><td>436.6</td><td class="sig">0</td></tr>
+<tr class="row-b"><td>counterfactual</td><td>B · 298k</td><td>6.12</td><td>5.51</td><td>0.96</td><td>106</td><td>436.7</td><td class="sig">0</td></tr>
+<tr class="row-b"><td>diagnose</td><td>B · 298k</td><td>177.17</td><td>609.54</td><td>14.09</td><td>352</td><td>440.5</td><td class="sig">0</td></tr>
+<tr class="row-a"><td>montecarlo --sensitivity</td><td>A · 150k</td><td>104.42</td><td>341.75</td><td>8.04</td><td>335</td><td>428.8</td><td class="sig">0</td></tr>
+<tr class="row-b"><td>montecarlo --sensitivity</td><td>B · 298k</td><td>90.59</td><td>295.60</td><td>6.67</td><td>334</td><td>439.8</td><td class="sig">0</td></tr>
+<tr><td><strong>合计</strong></td><td>—</td><td><strong>577.6</strong></td><td>—</td><td>—</td><td>—</td><td><strong>440.5</strong>(峰值)</td><td>—</td></tr>
+</tbody></table></div>
+<p>全部步骤合计墙钟 <span class="num">577.6 s</span>(9.6 分钟),单步峰值常驻内存 <span class="num">440 MB</span>。各步骤串行执行,数字之间不互相污染。</p>
+<!--STEPS:END-->
+  <p>
+    读法:分钟级的只有 <code>diagnose</code>(两份权重各约 176 s)和 <code>montecarlo</code>
+    (104 s / 91 s),两者合计占总墙钟的 <span class="num">95%</span>。它们的用户态 CPU 时间远大于墙钟
+    (diagnose 约 620 s vs 176 s)—— 这是内部多进程并行的结果,CPU% 在 334%~362%。
+    <code>replay</code> / <code>counterfactual</code> 是秒级单进程,解析三步(decode / verify / inspect)
+    合计不到 <span class="num">0.4 s</span>。峰值常驻内存由 torch + 权重决定,凡是加载模型的步骤都在
+    430 MB 上下,和牌谱长度、trials 数基本无关;不加载模型的解析步骤只要 20~30 MB。
+  </p>
+</section>
+
+<section id="method">
+  <p class="eyebrow">方法与局限</p>
+  <h2>命令原文与该打的折扣</h2>
+  <p>本报告的每一个数字都来自下列命令的日志输出,没有手工估算或跨步骤推算的成分。</p>
+  <pre><code>dareda decode-capture --capture majsoul-ws-1786618863235.json --out record.json
+dareda verify  --record record.json
+dareda inspect --record record.json
+
+# 权重 A = models/mortal_150k.pth,权重 B = models/mortal_298k.pth,以下各跑一遍
+dareda replay         --record record.json                      --model &lt;权重&gt;
+dareda counterfactual --record record.json --hero 2             --model &lt;权重&gt;
+dareda diagnose       --record record.json --hero 2 --trials 30 --with-selfluck --model &lt;权重&gt;
+dareda montecarlo     --record record.json --hero 2 --trials 20 --sensitivity   --model &lt;权重&gt;</code></pre>
+  <p>参数:<code>--seed 0</code>(默认值,两份权重保持一致才可比)、<code>--trials 30</code>(diagnose)、
+     <code>--trials 20</code>(montecarlo)。推理全程 CPU、关 AMP。</p>
+
+  <h3>三种模拟不是一回事</h3>
+  <p>
+    本报告里出现了三套结果各不相同的模拟,牌山是同一副,但<strong>「对手是谁」完全不同</strong>,
+    横向比较之前必须先看这张表(依据:<code>src/dareda/montecarlo.py</code>、
+    <code>src/dareda/engine/logfollow.py</code>)。
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>命令</th><th>hero</th><th>三个对手</th><th>内核</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>replay</code></td><td>Mortal(greedy)</td>
+        <td><strong>从第一张牌起也是 Mortal</strong>,完全不看人类日志</td>
+        <td><code>run_replay</code> + 四个 Mortal 引擎</td>
+      </tr>
+      <tr>
+        <td><code>counterfactual</code><br><code>montecarlo</code>(三档全部)</td><td>Mortal(greedy)</td>
+        <td><strong>照人类原样出牌</strong>;某家脱轨后才回落到 Mortal,「强度档」调的只是这个 fallback 的温度</td>
+        <td><code>CounterfactualMonteCarlo</code> + <code>LogFollowEngine</code></td>
+      </tr>
+      <tr>
+        <td><code>self-luck</code><br><code>diagnose</code></td><td>按自己标定温度的 Mortal</td>
+        <td>各按自己标定温度的 Mortal,<strong>从头重打一局全新的牌</strong>,不看日志</td>
+        <td><code>SelfStrengthMonteCarlo</code></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    所以 <code>replay</code> 的 hero 47000 / 1 位(A)和 <code>montecarlo</code> full-mortal 的 −16300 / 4 位
+    <strong>不构成矛盾</strong> —— 前者的对手不再打出人类那些牌,牌河从东一起就是另一局;
+    后者 hero 仍被钉在那条把他打崩的牌河上。同理,归因结论只该从第三行(self-luck / diagnose)读,
+    那是唯一一个为「这把怪谁」设计的实验。
+  </p>
+
+  <h3>该打的折扣</h3>
+  <ul>
+    <li>
+      <strong>counterfactual 的保真度只有 51%(中位数),这一项别当真。</strong>「只把 hero 换成 Mortal、
+      对手照原样打」在 hero 第一次做出不同选择之后,后续牌河就和原局对不上了 —— 对手的原样打法失去意义。
+      9 局里只有 1~2 局全程一致。它能说明的仅仅是「换 Mortal 也未必救得回来」这个方向,
+      终局点数(A −16300 / B 6800)不是可信的数值预测。
+    </li>
+    <li>
+      <strong>trials = 30 时分布抖动大。</strong>顺位分布的每一档只有 30 个样本,10% 这一档背后是 3 次。
+      两份权重独立跑出同样的 10%,是这个数字可信的主要理由,但它的置信区间依然宽
+      —— 别把 10% 读成精确值,读成「一成上下」。
+    </li>
+    <li>
+      <strong>「运气」是残差项,不是直接测量。</strong>三分解里运气 = 实际顺位 − 同水平期望顺位,
+      凡是模型没能归因到牌或打法上的东西都落进这一项。它包含真运气,也包含模型对 hero 水平的标定误差。
+    </li>
+    <li>
+      <strong>EV loss / 一致率是相对 Mortal 而言的。</strong>「打得一般」的意思是「和这份权重不太像」,
+      不等于人类标准下的错误。hero 一致率 72%~74% 在四家里已是最高档。
+    </li>
+    <li>
+      <strong>牌山验证有一个缺口。</strong>配牌恒等 9/9 通过、宝牌指示牌 9/9、里宝 2/2,
+      但这局<strong>无人开杠</strong>,岭上牌的取牌顺序没有样本可验。若真实规则在岭上牌上与本实现不同,
+      本报告不受影响(因为整局没用到岭上牌),但该约定在本牌谱上属于未验证状态。
+    </li>
+  </ul>
+</section>
+
+<section id="appendix">
+  <p class="eyebrow">附录</p>
+  <h2>详细模拟结果</h2>
+  <p>
+    正文只取了各步骤的汇总数字。这一节把模拟过程本身摊开:逐局的点数轨迹、
+    counterfactual 的逐局保真度、以及<strong>每条命令的完整日志原文</strong>。
+    报告里的每一个数字都能在这里找到出处。
+  </p>
+
+  <h3>A.1 逐局点数轨迹</h3>
+  <p>
+    人类原局给的是<strong>各局开局时</strong>的点数(取自 <code>inspect</code>),
+    模拟给的是<strong>各局结束时</strong>的点数(取自 <code>replay</code> / <code>counterfactual</code>),
+    两者口径差一局,不要横向逐格对比;看的是走势和终点。粗体是 hero(座2)。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>人类原局 —— 各局开局点数(inspect),终局 26600 / 37200 / <strong>4300</strong> / 31900</caption>
+    <thead><tr><th>局</th><th>庄</th><th>本场</th><th>座0</th><th>座1</th><th>座2(hero)</th><th>座3</th></tr></thead>
+    <tbody>
+      <tr><td>东一</td><td>座0</td><td class="num">0</td><td class="num">25000</td><td class="num">25000</td><td class="num"><strong>25000</strong></td><td class="num">25000</td></tr>
+      <tr><td>东二</td><td>座1</td><td class="num">0</td><td class="num">23000</td><td class="num">29000</td><td class="num"><strong>23500</strong></td><td class="num">24500</td></tr>
+      <tr><td>东三</td><td>座2</td><td class="num">1</td><td class="num">23000</td><td class="num">29000</td><td class="num"><strong>23500</strong></td><td class="num">24500</td></tr>
+      <tr><td>东四</td><td>座3</td><td class="num">0</td><td class="num">21700</td><td class="num">29000</td><td class="num"><strong>23500</strong></td><td class="num">25800</td></tr>
+      <tr><td>南一</td><td>座0</td><td class="num">0</td><td class="num">21700</td><td class="num">32900</td><td class="num"><strong>23500</strong></td><td class="num">21900</td></tr>
+      <tr><td>南二</td><td>座1</td><td class="num">0</td><td class="num">21700</td><td class="num">34900</td><td class="num"><strong>21500</strong></td><td class="num">21900</td></tr>
+      <tr><td>南三</td><td>座2</td><td class="num">0</td><td class="num">20400</td><td class="num">34900</td><td class="num"><strong>21500</strong></td><td class="num">23200</td></tr>
+      <tr><td>南四</td><td>座3</td><td class="num">0</td><td class="num">26600</td><td class="num">34900</td><td class="num"><strong>15300</strong></td><td class="num">23200</td></tr>
+      <tr><td>南四</td><td>座3</td><td class="num">1</td><td class="num">26600</td><td class="num">34900</td><td class="num"><strong>6600</strong></td><td class="num">31900</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note-line">
+    注意表里是<strong>局始</strong>点数,所以 21500 那一行(南三局始)代表<strong>前六局打完</strong>的状态。
+    hero 前六局几乎没动(25000 → 21500,−3500),分数是在<strong>南三、南四、南四1本这最后三局</strong>
+    掉光的:21500 → 15300 → 6600 → 终局 4300,合计 −17200。这也是为什么归因几乎全落在运气项上 ——
+    崩盘集中在最后三局。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>replay(四家全 Mortal)—— 各局<strong>结束</strong>点数</caption>
+    <thead><tr><th>权重</th><th>局</th><th>座0</th><th>座1</th><th>座2(hero)</th><th>座3</th><th>结果</th></tr></thead>
+    <tbody>
+      <tr class="row-a"><td>A · 150k</td><td>东一</td><td class="num">23700</td><td class="num">24300</td><td class="num"><strong>27700</strong></td><td class="num">24300</td><td>tsumo</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东二</td><td class="num">22200</td><td class="num">23300</td><td class="num"><strong>30700</strong></td><td class="num">23800</td><td>tsumo</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东三1本</td><td class="num">22200</td><td class="num">23300</td><td class="num"><strong>50000</strong></td><td class="num">4500</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东四</td><td class="num">19200</td><td class="num">35300</td><td class="num"><strong>47000</strong></td><td class="num">−1500</td><td>tsumo · <strong>击飞终局</strong></td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东一</td><td class="num">23700</td><td class="num">24300</td><td class="num"><strong>27700</strong></td><td class="num">24300</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东二</td><td class="num">22700</td><td class="num">31100</td><td class="num"><strong>27700</strong></td><td class="num">18500</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东三1本</td><td class="num">20600</td><td class="num">29000</td><td class="num"><strong>34000</strong></td><td class="num">16400</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东四</td><td class="num">17600</td><td class="num">41000</td><td class="num"><strong>31000</strong></td><td class="num">10400</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南一</td><td class="num">15600</td><td class="num">45000</td><td class="num"><strong>30000</strong></td><td class="num">9400</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南二</td><td class="num">14100</td><td class="num">43500</td><td class="num"><strong>30500</strong></td><td class="num">9900</td><td>ryuukyoku</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南三</td><td class="num">13600</td><td class="num">47500</td><td class="num"><strong>29500</strong></td><td class="num">9400</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南四</td><td class="num">12100</td><td class="num">46000</td><td class="num"><strong>31000</strong></td><td class="num">9900</td><td>ryuukyoku</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南四1本</td><td class="num">11300</td><td class="num">45200</td><td class="num"><strong>35000</strong></td><td class="num">8500</td><td>tsumo</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note-line">
+    两份权重的<strong>东一完全相同</strong>(23700/24300/27700/24300,hero 自摸)—— 同一副牌、同一 seed,
+    两个权重在第一局做出了一致的选择。分歧从东二开始:A 让 hero 在东三1本直接冲到 50000 并在东四击飞座3 提前终局;
+    B 走完九局、hero 稳在 3 万上下。这就是正文说 <code>replay</code> 这项「细节不稳」的依据。
+  </p>
+
+  <div class="table-wrap">
+  <table>
+    <caption>counterfactual(只 hero 换 Mortal,对手照人类原样打)—— 各局<strong>结束</strong>点数</caption>
+    <thead><tr><th>权重</th><th>局</th><th>座0</th><th>座1</th><th>座2(hero)</th><th>座3</th><th>结果</th></tr></thead>
+    <tbody>
+      <tr class="row-a"><td>A · 150k</td><td>东一</td><td class="num">37000</td><td class="num">21000</td><td class="num"><strong>21000</strong></td><td class="num">21000</td><td>tsumo</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东二</td><td class="num">37000</td><td class="num">29700</td><td class="num"><strong>21000</strong></td><td class="num">12300</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东三1本</td><td class="num">35700</td><td class="num">29700</td><td class="num"><strong>21000</strong></td><td class="num">13600</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>东四</td><td class="num">35700</td><td class="num">37700</td><td class="num"><strong>21000</strong></td><td class="num">5600</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>南一</td><td class="num">48700</td><td class="num">37700</td><td class="num"><strong>9000</strong></td><td class="num">4600</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>南二</td><td class="num">50800</td><td class="num">37200</td><td class="num"><strong>8700</strong></td><td class="num">3300</td><td>tsumo</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>南三</td><td class="num">48200</td><td class="num">39800</td><td class="num"><strong>8700</strong></td><td class="num">3300</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>南四</td><td class="num">48200</td><td class="num">39800</td><td class="num"><strong>0</strong></td><td class="num">12000</td><td>ron</td></tr>
+      <tr class="row-a"><td>A · 150k</td><td>南四1本</td><td class="num">48200</td><td class="num">56100</td><td class="num"><strong>−16300</strong></td><td class="num">12000</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东一</td><td class="num">37000</td><td class="num">21000</td><td class="num"><strong>21000</strong></td><td class="num">21000</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东二</td><td class="num">28000</td><td class="num">21000</td><td class="num"><strong>31000</strong></td><td class="num">20000</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东三1本</td><td class="num">26700</td><td class="num">21000</td><td class="num"><strong>31000</strong></td><td class="num">21300</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>东四</td><td class="num">23700</td><td class="num">33000</td><td class="num"><strong>28000</strong></td><td class="num">15300</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南一</td><td class="num">36700</td><td class="num">33000</td><td class="num"><strong>16000</strong></td><td class="num">14300</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南二</td><td class="num">36200</td><td class="num">34500</td><td class="num"><strong>15500</strong></td><td class="num">13800</td><td>tsumo</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南三</td><td class="num">20200</td><td class="num">34500</td><td class="num"><strong>15500</strong></td><td class="num">29800</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南四</td><td class="num">20200</td><td class="num">34500</td><td class="num"><strong>6800</strong></td><td class="num">38500</td><td>ron</td></tr>
+      <tr class="row-b"><td>B · 298k</td><td>南四1本</td><td class="num">18400</td><td class="num">34500</td><td class="num"><strong>6800</strong></td><td class="num">40300</td><td>ron</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note-line">
+    再强调一次:这张表的保真度只有 51%(中位数),<strong>不是可信的数值预测</strong>。
+    它唯一能说明的是「就算把 hero 换成 Mortal、而对手仍按原样出牌,hero 照样是 4 位」——
+    两份权重在这一点上一致。注意 A 下 hero 终局 −16300、B 下 6800,
+    与 <code>montecarlo</code> 的 full-mortal 档<strong>按构造是同一次计算</strong>(同一套引擎、
+    同样 greedy 的脱轨 fallback、epsilon = 0 完全确定),所以点数逐字相同。
+  </p>
+
+  <h3>A.2 counterfactual 逐局保真度</h3>
+  <p>
+    「脱轨@事件」= hero 第一次做出与人类不同的选择发生在该局第几个事件;
+    忠实比例 = 脱轨点之前的事件占该局全部事件的比例。比例越低,该局的模拟越不该当真。
+  </p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>局</th><th>该局事件数</th><th class="v-a">A 脱轨@</th><th class="v-a">A 忠实比例</th><th class="v-b">B 脱轨@</th><th class="v-b">B 忠实比例</th></tr></thead>
+    <tbody>
+      <tr><td>东一</td><td class="num">62</td><td class="num">49</td><td class="num">79%</td><td class="num">49</td><td class="num">79%</td></tr>
+      <tr><td>东二</td><td class="num">145</td><td class="num">28</td><td class="num">19%</td><td class="num">28</td><td class="num">19%</td></tr>
+      <tr><td>东三1本</td><td class="num">53</td><td>全程</td><td class="num">100%</td><td>全程</td><td class="num">100%</td></tr>
+      <tr><td>东四</td><td class="num">45</td><td class="num">23</td><td class="num">51%</td><td class="num">8</td><td class="num">18%</td></tr>
+      <tr><td>南一</td><td class="num">35</td><td class="num">18</td><td class="num">51%</td><td class="num">18</td><td class="num">51%</td></tr>
+      <tr><td>南二</td><td class="num">39</td><td class="num">20</td><td class="num">51%</td><td class="num">20</td><td class="num">51%</td></tr>
+      <tr><td>南三</td><td class="num">83</td><td class="num">38</td><td class="num">46%</td><td class="num">38</td><td class="num">46%</td></tr>
+      <tr><td>南四</td><td class="num">95</td><td class="num">40</td><td class="num">42%</td><td>全程</td><td class="num">100%</td></tr>
+      <tr><td>南四1本</td><td class="num">75</td><td class="num">16</td><td class="num">21%</td><td class="num">16</td><td class="num">21%</td></tr>
+      <tr><td><strong>汇总</strong></td><td>—</td><td colspan="2">1/9 局全程一致 · 中位数 <strong>51%</strong></td><td colspan="2">2/9 局全程一致 · 中位数 <strong>51%</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note-line">
+    <strong>东三1本(hero 自己的庄)两份权重都是全程一致</strong> —— Mortal 在这一局的每一个选择都和 hero 相同,
+    这局 hero 打得无可挑剔。两份权重只在两局上分歧:东四(A 51% / B 18%)和南四(A 42% / B 全程一致)。
+    崩盘最狠的南四1本,两边都只忠实到 21% 就脱轨了,所以「换 Mortal 能不能守住这一局」这个问题,
+    本工具其实<strong>回答不了</strong>。
+  </p>
+
+  <h3>A.3 蒙特卡洛三档的完整分布</h3>
+  <p>正文第 6 节的表已是完整分布(每档 1/2/3/4 位四个百分比 + 平均顺位 + 平均点数),此处不重复。
+     需要注意 <code>n</code> 列:full-mortal 档 <code>n=1</code>,另两档 <code>n=20</code>。</p>
+
+  <h3>A.4 命令日志原文</h3>
+  <p>
+    以下是 11 条命令的<strong>完整 stdout/stderr</strong>,由 <code>run_step.py</code> 逐条落盘,未经编辑。
+    点击标题展开。本报告正文的所有数字都可在这里逐字核对。
+  </p>
+<details class="rawlog">
+<summary>decode-capture —— 抓包解码 <span class="note" style="display:inline">0.18 s · 峰值 29.5 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda decode-capture --capture ~/Downloads/majsoul-ws-1786618863235.json --out .dareda-runs/majsoul-ws-1786618863235/record.json</code></p>
+<pre><code>抓包帧数     : 77(尝试解析 77 帧)
+牌谱所在帧   : 62
+uuid         : 260812-860b14a0-aa1c-414d-a468-81b51f2e32f3
+动作流来源   : inline
+动作条数     : 602
+RecordNewRound: 9 个小局
+
+已写出 .dareda-runs/majsoul-ws-1786618863235/record.json
+下一步: dareda verify --record .dareda-runs/majsoul-ws-1786618863235/record.json</code></pre>
+</details>
+<details class="rawlog">
+<summary>verify —— 配牌恒等自检 <span class="note" style="display:inline">0.12 s · 峰值 20.7 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda verify --record .dareda-runs/majsoul-ws-1786618863235/record.json</code></p>
+<pre><code>牌谱: majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  K = 9
+牌山约定: dead_wall_tail
+配牌恒等: 9/9 局通过
+  ✓ 全部通过 —— 发牌顺序 / 赤宝编码 / 牌山定点均正确
+
+王牌区布局:
+  宝牌指示牌: ✓ 9/9
+  里宝指示牌: ✓ 2/2
+  岭上牌: 无样本 —— 未验证(牌谱里没开杠)</code></pre>
+</details>
+<details class="rawlog">
+<summary>inspect —— 牌谱序列 <span class="note" style="display:inline">0.09 s · 峰值 20.0 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda inspect --record .dareda-runs/majsoul-ws-1786618863235/record.json</code></p>
+<pre><code>牌谱: majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3
+玩家: 座0 健麻a / 座1 ただ風を待つ / 座2 坏耶这把铁飞 / 座3 刘树德
+终局: 26600(3位) / 37200(1位) / 4300(4位) / 31900(2位)
+序列 (K=9): 东一 / 东二 / 东三1本 / 东四 / 南一 / 南二 / 南三 / 南四 / 南四1本
+  东一       庄=座0  本场=0  立直棒=0  点数=[25000, 25000, 25000, 25000]
+  东二       庄=座1  本场=0  立直棒=0  点数=[23000, 29000, 23500, 24500]
+  东三1本     庄=座2  本场=1  立直棒=0  点数=[23000, 29000, 23500, 24500]
+  东四       庄=座3  本场=0  立直棒=0  点数=[21700, 29000, 23500, 25800]
+  南一       庄=座0  本场=0  立直棒=0  点数=[21700, 32900, 23500, 21900]
+  南二       庄=座1  本场=0  立直棒=0  点数=[21700, 34900, 21500, 21900]
+  南三       庄=座2  本场=0  立直棒=0  点数=[20400, 34900, 21500, 23200]
+  南四       庄=座3  本场=0  立直棒=0  点数=[26600, 34900, 15300, 23200]
+  南四1本     庄=座3  本场=1  立直棒=0  点数=[26600, 34900, 6600, 31900]</code></pre>
+</details>
+<details class="rawlog">
+<summary>replay(权重 A · 150k)—— 四家全 Mortal <span class="note" style="display:inline">3.44 s · 峰值 430.6 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda replay --record .dareda-runs/majsoul-ws-1786618863235/record.json --model models/mortal_150k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  K=9
+引擎 mortal4-b40c192-t24011010|steps=150000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release
+
+         | 人类原局                     | Mortal replay                
+---------+------------------------------+------------------------------
+最终名次 | 3位 / 1位 / 4位 / 2位        | 3位 / 2位 / 1位 / 4位        
+最终点数 | 26600 / 37200 / 4300 / 31900 | 19200 / 35300 / 47000 / -1500
+实际局数 | K = 9                        | K&#x27; = 4                       
+终止原因 | —                            | 击飞                         
+
+确定性标签: mortal4-b40c192-t24011010|steps=150000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release
+
+局           座0      座1      座2      座3  结果
+东一      23700   24300   27700   24300  tsumo
+东二      22200   23300   30700   23800  tsumo
+东三1本   22200   23300   50000    4500  ron
+东四      19200   35300   47000   -1500  tsumo</code></pre>
+</details>
+<details class="rawlog">
+<summary>counterfactual(权重 A · 150k)—— 只 hero 换 Mortal <span class="note" style="display:inline">11.38 s · 峰值 434.7 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda counterfactual --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --model models/mortal_150k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  K=9
+英雄座 2 = 坏耶这把铁飞
+引擎 mortal4-b40c192-t24011010|steps=150000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release|hero=2
+
+         | 人类原局                     | Mortal replay                 
+---------+------------------------------+-------------------------------
+最终名次 | 3位 / 1位 / 4位 / 2位        | 2位 / 1位 / 4位 / 3位         
+最终点数 | 26600 / 37200 / 4300 / 31900 | 48200 / 56100 / -16300 / 12000
+实际局数 | K = 9                        | K&#x27; = 9                        
+终止原因 | —                            | 击飞                          
+
+确定性标签: mortal4-b40c192-t24011010|steps=150000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release|hero=2
+
+保真度(英雄=座2,对手照人类原样打):
+  局              脱轨@事件     该局事件           忠实比例
+  东一                49       62            79%
+  东二                28      145            19%
+  东三1本              全程       53     100%(全程一致)
+  东四                23       45            51%
+  南一                18       35            51%
+  南二                20       39            51%
+  南三                38       83            46%
+  南四                40       95            42%
+  南四1本              16       75            21%
+  —— 1/9 局全程一致;忠实比例中位数 51%
+
+局           座0      座1      座2      座3  结果
+东一      37000   21000   21000   21000  tsumo
+东二      37000   29700   21000   12300  ron
+东三1本   35700   29700   21000   13600  ron
+东四      35700   37700   21000    5600  ron
+南一      48700   37700    9000    4600  ron
+南二      50800   37200    8700    3300  tsumo
+南三      48200   39800    8700    3300  ron
+南四      48200   39800       0   12000  ron
+南四1本   48200   56100  -16300   12000  ron</code></pre>
+</details>
+<details class="rawlog">
+<summary>diagnose --with-selfluck(权重 A · 150k) <span class="note" style="display:inline">175.66 s · 峰值 426.1 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda diagnose --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --trials 30 --with-selfluck --model models/mortal_150k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  hero=座2(坏耶这把铁飞)  并行 4 进程
+
+[1/3] 测四家强度...
+
+[2/3] 均等水平基线 —— 这副牌本身值几位
+
+  1/30
+  2/30
+  3/30
+  4/30
+  5/30
+  6/30
+  7/30
+  8/30
+  9/30
+  10/30
+  11/30
+  12/30
+  13/30
+  14/30
+  15/30
+  16/30
+  17/30
+  18/30
+  19/30
+  20/30
+  21/30
+  22/30
+  23/30
+  24/30
+  25/30
+  26/30
+  27/30
+  28/30
+  29/30
+  30/30
+[3/3] 真实水平 —— 加上各家实际打法
+
+  1/30
+  2/30
+  3/30
+  4/30
+  5/30
+  6/30
+  7/30
+  8/30
+  9/30
+  10/30
+  11/30
+  12/30
+  13/30
+  14/30
+  15/30
+  16/30
+  17/30
+  18/30
+  19/30
+  20/30
+  21/30
+  22/30
+  23/30
+  24/30
+  25/30
+  26/30
+  27/30
+  28/30
+  29/30
+  30/30
+对手强度(相对 Mortal,在人类原局上测):
+  座   玩家             决策     一致率   EV loss
+  0   健麻a            93     53%     0.488
+  1   ただ風を待つ         89     72%     0.257
+  2   坏耶这把铁飞         74     72%     0.320
+  3   刘树德            93     62%     0.369
+
+=== 这把怪谁?  座2 坏耶这把铁飞 ===
+
+  牌   ★★★★☆  好牌    均等水平下,这个座位期望 2.17 位
+  打   ★★☆☆☆  打得一般  你的打法把期望推到 2.30 位(-0.13)   ← EV loss 0.32(四家第 2 低)
+  运   ☆☆☆☆☆  运气背   你的同水平里,4 位或更差占 10%
+
+  → 好牌,打得一般,而且这把运气还背。
+
+  名次分解(以 2.5 位为中性起点,正数=对你有利):
+    牌与座次 +0.33  +  打法 -0.13  +  运气 -1.70  =  -1.50
+    (每条基线 30 次蒙特卡洛)
+
+  这副牌上,你的名次概率(横条按 1/2/3/4 位切分,▲=实际):
+  你的真实水平  [①①①①①①①②②②②②②②②②②②②②②③③③③③③③③③③③④④④④]  20%  40%  30%  10%  (实际 4 位)
+                  1位       2位       3位       4位       
+
+============================================================
+同水平自打(= self-luck,复用上面第 3 步的轨迹,没有额外开销)
+标定温度: {0: 1.17, 1: 1.0, 2: 1.0, 3: 1.13}
+
+座  玩家           EV loss    实际     同水平期望     1位     2位     3位     4位
+0  健麻a            0.488    3位     3.33     3%    13%    30%    53%
+1  ただ風を待つ         0.257    1位     1.50    63%    23%    13%     0%
+2  坏耶这把铁飞         0.320    4位     2.30    20%    40%    30%    10% ←你
+3  刘树德            0.369    2位     2.87    13%    23%    27%    37%
+
+座2 同水平自打分布  n=30  平均顺位 2.30  平均点数 26433
+    1位  20.0%  ███████
+    2位  40.0%  █████████████
+    3位  30.0%  ██████████
+    4位  10.0%  ███
+
+实际 4 位;同水平自打期望 2.30 位。
+  P(打到4位)=10%  P(≤4位,即这么差或更差)=10%  P(比4位更好)=90%
+  判断:偏背 —— 你的同水平只有 10% 会打到 4 位或更差</code></pre>
+</details>
+<details class="rawlog">
+<summary>replay(权重 B · 298k)—— 四家全 Mortal <span class="note" style="display:inline">8.42 s · 峰值 436.6 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda replay --record .dareda-runs/majsoul-ws-1786618863235/record.json --model models/mortal_298k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  K=9
+引擎 mortal4-b40c192-t26031702|steps=298000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release
+
+         | 人类原局                     | Mortal replay               
+---------+------------------------------+-----------------------------
+最终名次 | 3位 / 1位 / 4位 / 2位        | 3位 / 1位 / 2位 / 4位       
+最终点数 | 26600 / 37200 / 4300 / 31900 | 11300 / 45200 / 35000 / 8500
+实际局数 | K = 9                        | K&#x27; = 9                      
+终止原因 | —                            | 走完                        
+
+确定性标签: mortal4-b40c192-t26031702|steps=298000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release
+
+局           座0      座1      座2      座3  结果
+东一      23700   24300   27700   24300  tsumo
+东二      22700   31100   27700   18500  ron
+东三1本   20600   29000   34000   16400  tsumo
+东四      17600   41000   31000   10400  tsumo
+南一      15600   45000   30000    9400  tsumo
+南二      14100   43500   30500    9900  ryuukyoku
+南三      13600   47500   29500    9400  tsumo
+南四      12100   46000   31000    9900  ryuukyoku
+南四1本   11300   45200   35000    8500  tsumo</code></pre>
+</details>
+<details class="rawlog">
+<summary>counterfactual(权重 B · 298k)—— 只 hero 换 Mortal <span class="note" style="display:inline">6.12 s · 峰值 436.7 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda counterfactual --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --model models/mortal_298k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  K=9
+英雄座 2 = 坏耶这把铁飞
+引擎 mortal4-b40c192-t26031702|steps=298000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release|hero=2
+
+         | 人类原局                     | Mortal replay               
+---------+------------------------------+-----------------------------
+最终名次 | 3位 / 1位 / 4位 / 2位        | 3位 / 2位 / 4位 / 1位       
+最终点数 | 26600 / 37200 / 4300 / 31900 | 18400 / 34500 / 6800 / 40300
+实际局数 | K = 9                        | K&#x27; = 9                      
+终止原因 | —                            | 走完                        
+
+确定性标签: mortal4-b40c192-t26031702|steps=298000|device=cpu|amp=False|torch=2.13.0|libriichi=0.1.0/release|hero=2
+
+保真度(英雄=座2,对手照人类原样打):
+  局              脱轨@事件     该局事件           忠实比例
+  东一                49       62            79%
+  东二                28      145            19%
+  东三1本              全程       53     100%(全程一致)
+  东四                 8       45            18%
+  南一                18       35            51%
+  南二                20       39            51%
+  南三                38       83            46%
+  南四                全程       95     100%(全程一致)
+  南四1本              16       75            21%
+  —— 2/9 局全程一致;忠实比例中位数 51%
+
+局           座0      座1      座2      座3  结果
+东一      37000   21000   21000   21000  tsumo
+东二      28000   21000   31000   20000  ron
+东三1本   26700   21000   31000   21300  ron
+东四      23700   33000   28000   15300  tsumo
+南一      36700   33000   16000   14300  ron
+南二      36200   34500   15500   13800  tsumo
+南三      20200   34500   15500   29800  ron
+南四      20200   34500    6800   38500  ron
+南四1本   18400   34500    6800   40300  ron</code></pre>
+</details>
+<details class="rawlog">
+<summary>diagnose --with-selfluck(权重 B · 298k) <span class="note" style="display:inline">177.17 s · 峰值 440.5 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda diagnose --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --trials 30 --with-selfluck --model models/mortal_298k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  hero=座2(坏耶这把铁飞)  并行 4 进程
+
+[1/3] 测四家强度...
+
+[2/3] 均等水平基线 —— 这副牌本身值几位
+
+  1/30
+  2/30
+  3/30
+  4/30
+  5/30
+  6/30
+  7/30
+  8/30
+  9/30
+  10/30
+  11/30
+  12/30
+  13/30
+  14/30
+  15/30
+  16/30
+  17/30
+  18/30
+  19/30
+  20/30
+  21/30
+  22/30
+  23/30
+  24/30
+  25/30
+  26/30
+  27/30
+  28/30
+  29/30
+  30/30
+[3/3] 真实水平 —— 加上各家实际打法
+
+  1/30
+  2/30
+  3/30
+  4/30
+  5/30
+  6/30
+  7/30
+  8/30
+  9/30
+  10/30
+  11/30
+  12/30
+  13/30
+  14/30
+  15/30
+  16/30
+  17/30
+  18/30
+  19/30
+  20/30
+  21/30
+  22/30
+  23/30
+  24/30
+  25/30
+  26/30
+  27/30
+  28/30
+  29/30
+  30/30
+对手强度(相对 Mortal,在人类原局上测):
+  座   玩家             决策     一致率   EV loss
+  0   健麻a            93     57%     0.424
+  1   ただ風を待つ         89     72%     0.229
+  2   坏耶这把铁飞         74     74%     0.224
+  3   刘树德            93     61%     0.310
+
+=== 这把怪谁?  座2 坏耶这把铁飞 ===
+
+  牌   ★★★★☆  好牌    均等水平下,这个座位期望 2.10 位
+  打   ★★☆☆☆  打得一般  你的打法把期望推到 2.13 位(-0.03)   ← EV loss 0.22(四家最低)
+  运   ☆☆☆☆☆  运气背   你的同水平里,4 位或更差占 10%
+
+  → 好牌,打得一般,而且这把运气还背。
+
+  名次分解(以 2.5 位为中性起点,正数=对你有利):
+    牌与座次 +0.40  +  打法 -0.03  +  运气 -1.87  =  -1.50
+    (每条基线 30 次蒙特卡洛)
+
+  这副牌上,你的名次概率(横条按 1/2/3/4 位切分,▲=实际):
+  你的真实水平  [①①①①①①①①①①①②②②②②②②②②②②②②③③③③③③③③④④④④]  30%  37%  23%  10%  (实际 4 位)
+                  1位       2位       3位       4位       
+
+============================================================
+同水平自打(= self-luck,复用上面第 3 步的轨迹,没有额外开销)
+标定温度: {0: 1.11, 1: 1.0, 2: 1.0, 3: 1.02}
+
+座  玩家           EV loss    实际     同水平期望     1位     2位     3位     4位
+0  健麻a            0.424    3位     3.43     3%    13%    20%    63%
+1  ただ風を待つ         0.229    1位     1.87    47%    33%     7%    13%
+2  坏耶这把铁飞         0.224    4位     2.13    30%    37%    23%    10% ←你
+3  刘树德            0.310    2位     2.57    20%    17%    50%    13%
+
+座2 同水平自打分布  n=30  平均顺位 2.13  平均点数 31680
+    1位  30.0%  ██████████
+    2位  36.7%  ████████████
+    3位  23.3%  ████████
+    4位  10.0%  ███
+
+实际 4 位;同水平自打期望 2.13 位。
+  P(打到4位)=10%  P(≤4位,即这么差或更差)=10%  P(比4位更好)=90%
+  判断:偏背 —— 你的同水平只有 10% 会打到 4 位或更差</code></pre>
+</details>
+<details class="rawlog">
+<summary>montecarlo --sensitivity(权重 A · 150k) <span class="note" style="display:inline">104.42 s · 峰值 428.8 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda montecarlo --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --trials 20 --sensitivity --model models/mortal_150k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  hero=座2(坏耶这把铁飞)
+测对手强度(在人类原局上)...
+对手强度(相对 Mortal,在人类原局上测):
+  座   玩家             决策     一致率   EV loss
+  0   健麻a            93     53%     0.488
+  1   ただ風を待つ         89     72%     0.257
+  2   坏耶这把铁飞         74     72%     0.320
+  3   刘树德            93     62%     0.369
+
+=== 强度档 [full-mortal] 对手温度 {0: 1.0, 1: 1.0, 3: 1.0} ===
+  四家全 greedy,轨迹完全确定 —— 只跑 1 条(跑 N 条是同一局算 N 遍)
+
+  轨迹 1/1
+座2 @ full-mortal  n=1  平均顺位 4.00  平均点数 -16300
+    1位   0.0%  
+    2位   0.0%  
+    3位   0.0%  
+    4位 100.0%  █████████████████████████████████
+
+=== 强度档 [calibrated] 对手温度 {0: 1.17, 1: 1.0, 3: 1.13} ===
+
+  轨迹 1/20
+  轨迹 2/20
+  轨迹 3/20
+  轨迹 4/20
+  轨迹 5/20
+  轨迹 6/20
+  轨迹 7/20
+  轨迹 8/20
+  轨迹 9/20
+  轨迹 10/20
+  轨迹 11/20
+  轨迹 12/20
+  轨迹 13/20
+  轨迹 14/20
+  轨迹 15/20
+  轨迹 16/20
+  轨迹 17/20
+  轨迹 18/20
+  轨迹 19/20
+  轨迹 20/20
+座2 @ calibrated  n=20  平均顺位 3.10  平均点数 16325
+    1位  15.0%  █████
+    2位  10.0%  ███
+    3位  25.0%  ████████
+    4位  50.0%  █████████████████
+
+=== 强度档 [weaker] 对手温度 {0: 1.65, 1: 1.29, 3: 1.57} ===
+
+  轨迹 1/20
+  轨迹 2/20
+  轨迹 3/20
+  轨迹 4/20
+  轨迹 5/20
+  轨迹 6/20
+  轨迹 7/20
+  轨迹 8/20
+  轨迹 9/20
+  轨迹 10/20
+  轨迹 11/20
+  轨迹 12/20
+  轨迹 13/20
+  轨迹 14/20
+  轨迹 15/20
+  轨迹 16/20
+  轨迹 17/20
+  轨迹 18/20
+  轨迹 19/20
+  轨迹 20/20
+座2 @ weaker  n=20  平均顺位 3.05  平均点数 16120
+    1位   5.0%  ██
+    2位  25.0%  ████████
+    3位  30.0%  ██████████
+    4位  40.0%  █████████████</code></pre>
+</details>
+<details class="rawlog">
+<summary>montecarlo --sensitivity(权重 B · 298k) <span class="note" style="display:inline">90.59 s · 峰值 439.8 MB · 退出码 0</span></summary>
+<p class="cmdline"><code>dareda montecarlo --record .dareda-runs/majsoul-ws-1786618863235/record.json --hero 2 --trials 20 --sensitivity --model models/mortal_298k.pth</code></p>
+<pre><code>牌谱 majsoul:260812-860b14a0-aa1c-414d-a468-81b51f2e32f3  hero=座2(坏耶这把铁飞)
+测对手强度(在人类原局上)...
+对手强度(相对 Mortal,在人类原局上测):
+  座   玩家             决策     一致率   EV loss
+  0   健麻a            93     57%     0.424
+  1   ただ風を待つ         89     72%     0.229
+  2   坏耶这把铁飞         74     74%     0.224
+  3   刘树德            93     61%     0.310
+
+=== 强度档 [full-mortal] 对手温度 {0: 1.0, 1: 1.0, 3: 1.0} ===
+  四家全 greedy,轨迹完全确定 —— 只跑 1 条(跑 N 条是同一局算 N 遍)
+
+  轨迹 1/1
+座2 @ full-mortal  n=1  平均顺位 4.00  平均点数 6800
+    1位   0.0%  
+    2位   0.0%  
+    3位   0.0%  
+    4位 100.0%  █████████████████████████████████
+
+=== 强度档 [calibrated] 对手温度 {0: 1.11, 1: 1.0, 3: 1.02} ===
+
+  轨迹 1/20
+  轨迹 2/20
+  轨迹 3/20
+  轨迹 4/20
+  轨迹 5/20
+  轨迹 6/20
+  轨迹 7/20
+  轨迹 8/20
+  轨迹 9/20
+  轨迹 10/20
+  轨迹 11/20
+  轨迹 12/20
+  轨迹 13/20
+  轨迹 14/20
+  轨迹 15/20
+  轨迹 16/20
+  轨迹 17/20
+  轨迹 18/20
+  轨迹 19/20
+  轨迹 20/20
+座2 @ calibrated  n=20  平均顺位 3.60  平均点数 6680
+    1位   5.0%  ██
+    2位   5.0%  ██
+    3位  15.0%  █████
+    4位  75.0%  █████████████████████████
+
+=== 强度档 [weaker] 对手温度 {0: 1.56, 1: 1.21, 3: 1.43} ===
+
+  轨迹 1/20
+  轨迹 2/20
+  轨迹 3/20
+  轨迹 4/20
+  轨迹 5/20
+  轨迹 6/20
+  轨迹 7/20
+  轨迹 8/20
+  轨迹 9/20
+  轨迹 10/20
+  轨迹 11/20
+  轨迹 12/20
+  轨迹 13/20
+  轨迹 14/20
+  轨迹 15/20
+  轨迹 16/20
+  轨迹 17/20
+  轨迹 18/20
+  轨迹 19/20
+  轨迹 20/20
+座2 @ weaker  n=20  平均顺位 3.30  平均点数 11980
+    1位  10.0%  ███
+    2位  15.0%  █████
+    3位  10.0%  ███
+    4位  65.0%  ██████████████████████</code></pre>
+</details>
+
+</section>
+
+<footer>
+  <p>
+    dareda 牌谱全量分析 · 牌谱 <code>majsoul-ws-1786618863235</code> · hero = 座2 ·
+    权重 A <code>mortal_150k.pth</code> / B <code>mortal_298k.pth</code> · seed 0
+  </p>
+</footer>
+
+</div>
+
+<style>
+/* 正文里用到、但 report.css 只在 .tile 作用域下定义过的几个小类 */
+.note { font-size: 12.5px; color: var(--muted); line-height: 1.45; display: block; margin-top: 3px; }
+td .note, th .note { font-weight: 400; }
+p.note-line { font-size: 13.5px; color: var(--ink-2); }
+tr.hero > td { background: color-mix(in srgb, var(--jade) 8%, transparent); }
+.pending { border: 1px dashed var(--rule, currentColor); border-radius: 10px;
+           padding: 14px 18px; color: var(--ink-2); background: transparent; }
+.pending p { margin: 6px 0; }
+
+/* run.sh 的招牌一句话结论 */
+.oneline { font-size: 23px; font-weight: 700; line-height: 1.4; margin: 0 0 6px;
+           letter-spacing: .01em; }
+.oneline-sub { font-size: 13.5px; color: var(--ink-2); margin: 0 0 14px; }
+table.stars td.star { font-size: 17px; letter-spacing: 2px; white-space: nowrap; }
+table.stars td, table.stars th { vertical-align: top; }
+
+/* 附录:折叠的日志原文 */
+details.rawlog { border-top: 1px solid var(--rule); padding: 10px 0; }
+details.rawlog summary { cursor: pointer; font-weight: 600; font-size: 14.5px;
+                         list-style-position: outside; }
+details.rawlog summary::marker { color: var(--muted); }
+details.rawlog summary .note { margin-left: 8px; font-weight: 400; }
+details.rawlog .cmdline { margin: 10px 0 6px; font-size: 12.5px; overflow-x: auto; }
+details.rawlog pre { max-height: 460px; overflow: auto; }
+table caption { caption-side: top; text-align: left; font-size: 13px;
+                color: var(--ink-2); padding-bottom: 8px; }
+</style>
+
+<script>
+(function () {
+  function draw() {
+    RPT.groupedBars("c1", {
+      groups: ["1 位", "2 位", "3 位", "4 位"],
+      series: [
+        { name: "A · 150k", values: [20.0, 40.0, 30.0, 10.0], color: "--jade" },
+        { name: "B · 298k", values: [30.0, 36.7, 23.3, 10.0], color: "--clay" }
+      ],
+      max: 40, ticks: [0, 10, 20, 30, 40], unit: "%",
+      guide: { at: 25, label: "等强 25%" }
+    });
+    RPT.groupedBars("c2", {
+      groups: ["full-mortal (n=1)", "calibrated (n=20)", "weaker (n=20)"],
+      series: [
+        { name: "A · 150k", values: [4.00, 3.10, 3.05], color: "--jade" },
+        { name: "B · 298k", values: [4.00, 3.60, 3.30], color: "--clay" }
+      ],
+      max: 4, ticks: [0, 1, 2, 3, 4], unit: " 位", left: 56, bottom: 50,
+      guide: { at: 2.5, label: "中性 2.5 位" }
+    });
+  }
+  draw();
+  RPT.onThemeChange(draw);
+})();
+</script>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<script>
+/* 侧边导航:从正文的 section > h2 自动生成,不需要在 body 里手写目录。
+ *
+ * 每个 <section> 取它的 <h2> 当条目文字、<p class="eyebrow"> 当小标签;
+ * 没有 id 的 section 会被补一个,锚点才点得动。
+ *
+ * 宽屏固定在左侧,窄屏(< 1180px)整条隐藏 —— 正文本身是单栏 860px,
+ * 挤不下的时候宁可不要目录,也不要把正文压窄。
+ */
+(function () {
+  function slug(i) { return "sec-" + i; }
+
+  function build() {
+    var nav = document.getElementById("toc");
+    if (!nav) return;
+    var secs = document.querySelectorAll(".page section");
+    if (secs.length < 2) return;
+
+    var list = document.createElement("ol");
+    var links = [];
+    Array.prototype.forEach.call(secs, function (sec, i) {
+      var h2 = sec.querySelector("h2");
+      if (!h2) return;
+      if (!sec.id) sec.id = slug(i);
+      var eyebrow = sec.querySelector(".eyebrow");
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = "#" + sec.id;
+      if (eyebrow) {
+        var tag = document.createElement("span");
+        tag.className = "toc-tag";
+        tag.textContent = eyebrow.textContent.trim();
+        a.appendChild(tag);
+      }
+      a.appendChild(document.createTextNode(h2.textContent.trim()));
+      li.appendChild(a);
+      list.appendChild(li);
+      links.push({ a: a, sec: sec });
+    });
+    if (!links.length) return;
+    nav.textContent = "";
+    nav.appendChild(list);
+
+    // 滚动高亮:取当前视口里最靠上、且已经越过顶部三分之一线的那一节
+    function mark() {
+      var best = links[0], line = window.innerHeight * 0.33;
+      links.forEach(function (l) {
+        if (l.sec.getBoundingClientRect().top <= line) best = l;
+      });
+      links.forEach(function (l) {
+        l.a.classList.toggle("on", l === best);
+      });
+    }
+    mark();
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { mark(); ticking = false; });
+    }, { passive: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", build);
+  } else {
+    build();
+  }
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "WM's Blog",
+  "short_name": "WM",
+  "start_url": "/679/",
+  "scope": "/679/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": []
+}
